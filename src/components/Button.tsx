@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export default function Button({ children, ...props }: PropsWithChildren) {
+interface ButtonProps extends PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> {}
+
+export default function Button({ children, ...props }: ButtonProps) {
   return <Wrap {...props}>{children}</Wrap>;
 }
 

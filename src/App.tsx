@@ -1,5 +1,5 @@
 import { Global } from '@emotion/react';
-import reset from './Reset';
+import reset from './reset';
 import TodoList from './components/TodoList';
 
 export default function App() {

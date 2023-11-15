@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
+import React from 'react';
 
-export default function AddCardButton() {
+interface AddCardButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export default function AddCardButton({ ...props }: AddCardButtonProps) {
   return (
-    <Wrap>
+    <Wrap {...props}>
       <div>+</div>
     </Wrap>
   );
