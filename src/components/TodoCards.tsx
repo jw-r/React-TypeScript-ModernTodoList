@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import AddCardButton from './AddCard';
 import { useTodoStore } from '../hooks/useCardStore';
+import Button from './Button';
 
 export default function TodoCards() {
   const { cardRepository, createCard, deleteCard, selectedCardId, selectCard } = useTodoStore();
@@ -8,12 +9,17 @@ export default function TodoCards() {
   return (
     <List>
       {cardRepository.map((cardData) => (
-        <Card key={cardData.id} selected={selectedCardId === cardData.id} onClick={() => selectCard(cardData.id)}>
-          <div>{cardData.title}</div>
-          <button id={cardData.id} onClick={() => deleteCard(cardData.id)}>
-            삭제
-          </button>
-        </Card>
+        <CardContainer key={cardData.id}>
+          <Card selected={selectedCardId === cardData.id} onClick={() => selectCard(cardData.id)}>
+            <div>{cardData.title}</div>
+            {cardData.todos.map((todo, index) => (
+              <div key={index}>{todo}</div>
+            ))}
+          </Card>
+          <DeleteButton id={cardData.id} onClick={() => deleteCard(cardData.id)}>
+            ❌
+          </DeleteButton>
+        </CardContainer>
       ))}
       {cardRepository.length < 9 && <AddCardButton onClick={createCard} />}
     </List>
@@ -29,6 +35,12 @@ const List = styled.div`
   padding: 30px;
 `;
 
+const CardContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: fit-content;
+`;
+
 const Card = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
@@ -40,4 +52,14 @@ const Card = styled.div<{ selected: boolean }>`
   background-color: aliceblue;
   border-radius: 4px;
   box-shadow: ${(props) => (props.selected ? '0px 0px 4px 3px rgba(255, 111, 15, 0.32)' : '')};
+`;
+
+const DeleteButton = styled(Button)`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+
+  font-size: 8px;
+
+  background-color: #ffd0d0;
 `;

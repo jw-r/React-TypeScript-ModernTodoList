@@ -1,11 +1,33 @@
 import styled from '@emotion/styled';
 import Button from './Button';
+import React, { useState } from 'react';
+import { useTodoStore } from '../hooks/useCardStore';
 
 export default function TodoHandler() {
+  const { cardRepository, selectedCardId, addTodo } = useTodoStore();
+  const [value, setValue] = useState('');
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (cardRepository.length < 1) {
+      alert('먼저 카드를 생성해주세요');
+      return;
+    }
+
+    if (!selectedCardId) {
+      alert('할일을 추가할 카드를 선택해주세요');
+      return;
+    }
+
+    addTodo(value);
+    setValue('');
+  };
+
   return (
     <Wrap>
-      <Form>
-        <Input placeholder='할일을 추가해주세요' />
+      <Form onSubmit={onSubmit}>
+        <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder='할일을 추가해주세요' />
         <Actions>
           <Button>추가</Button>
         </Actions>
