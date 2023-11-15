@@ -1,28 +1,16 @@
 import styled from '@emotion/styled';
 import AddCardButton from './AddCard';
-import { useState } from 'react';
-import uuid from 'react-uuid';
-
-interface CardData {
-  id: string;
-  title: string;
-}
+import { useTodoStore } from '../hooks/useCardStore';
 
 export default function TodoCards() {
-  const [cardRepository, setCardRepository] = useState<CardData[]>([]);
-  const createCard = () => {
-    setCardRepository((prev) => [...prev, { id: uuid(), title: `TODO ${cardRepository.length + 1}` }]);
-  };
-  const deleteCard = ({ currentTarget }: React.MouseEvent<HTMLButtonElement>) => {
-    setCardRepository((prev) => prev.filter(({ id }) => id !== currentTarget.id));
-  };
+  const { cardRepository, createCard, deleteCard, selectedCardId, selectCard } = useTodoStore();
 
   return (
     <List>
       {cardRepository.map((cardData) => (
-        <Card key={cardData.id}>
+        <Card key={cardData.id} selected={selectedCardId === cardData.id} onClick={() => selectCard(cardData.id)}>
           <div>{cardData.title}</div>
-          <button id={cardData.id} onClick={deleteCard}>
+          <button id={cardData.id} onClick={() => deleteCard(cardData.id)}>
             삭제
           </button>
         </Card>
@@ -41,7 +29,7 @@ const List = styled.div`
   padding: 30px;
 `;
 
-const Card = styled.div`
+const Card = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,4 +39,5 @@ const Card = styled.div`
 
   background-color: aliceblue;
   border-radius: 4px;
+  box-shadow: ${(props) => (props.selected ? '0px 0px 4px 3px rgba(255, 111, 15, 0.32)' : '')};
 `;
