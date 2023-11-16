@@ -20,8 +20,10 @@ export default function TodoHandler() {
       return;
     }
 
-    addTodo(value);
-    setValue('');
+    if (value.replace(/\s/g, '')) {
+      addTodo(value);
+      setValue('');
+    }
   };
 
   return (

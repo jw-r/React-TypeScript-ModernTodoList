@@ -138,6 +138,13 @@ const reset = css`
     border-spacing: 0;
     border-collapse: collapse;
   }
+
+  li::before {
+    content: '•';
+    display: inline-block;
+    width: 1em;
+    color: #ff6f0f;
+  }
 `;
 
 export default reset;
