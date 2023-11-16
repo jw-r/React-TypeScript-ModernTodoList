@@ -10,15 +10,15 @@ export default function Button({ children, ...props }: ButtonProps) {
 const Wrap = styled.button`
   padding: 8px 12px;
 
-  color: white;
+  color: ${(props) => props.theme.colors.bright};
 
-  background-color: #ff6f0f;
+  background-color: ${(props) => props.theme.colors.main};
   border: none;
   border-radius: 8px;
 
   transition: background-color 0.2s ease-out;
 
   &:hover {
-    background-color: #f06000;
+    background-color: ${(props) => props.theme.colors.main_dark};
   }
 `;

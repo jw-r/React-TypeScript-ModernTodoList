@@ -43,9 +43,9 @@ const Card = styled.div<{ selected: boolean }>`
   min-height: 160px;
   padding: 12px;
 
-  background-color: aliceblue;
+  background-color: ${(props) => props.theme.colors.card_background};
   border-radius: 4px;
-  box-shadow: ${(props) => (props.selected ? '0px 0px 4px 3px rgba(255, 111, 15, 0.32)' : '')};
+  box-shadow: ${(props) => (props.selected ? props.theme.shadow.main : '')};
 `;
 
 const CardTitle = styled.div`

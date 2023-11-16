@@ -18,7 +18,7 @@ const Wrap = styled.button`
 
   min-height: 160px;
 
-  background-color: #f2f3f6;
+  background-color: ${(props) => props.theme.colors.bright_dark};
   border: none;
   border-radius: 4px;
 
@@ -32,14 +32,14 @@ const Wrap = styled.button`
 
     font-size: 24px;
     font-weight: 600;
-    color: white;
+    color: ${(props) => props.theme.colors.bright};
 
-    background-color: #ff6f0f;
+    background-color: ${(props) => props.theme.colors.main};
     border-radius: 50%;
   }
 
   &:hover > div {
-    background-color: #f06000;
+    background-color: ${(props) => props.theme.colors.main_dark};
     transition: background-color 0.2s ease-out;
   }
 `;

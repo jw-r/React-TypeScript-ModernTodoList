@@ -45,7 +45,7 @@ const Wrap = styled.div`
   padding: 30px 20px;
 
   border-radius: 6px;
-  box-shadow: 0px 0px 4px 3px rgba(255, 111, 15, 0.32);
+  box-shadow: ${(props) => props.theme.shadow.main};
 `;
 
 const Form = styled.form`
@@ -58,7 +58,7 @@ const Form = styled.form`
 const Input = styled.input`
   padding: 10px 12px;
 
-  background-color: #f2f3f6;
+  background-color: ${(props) => props.theme.colors.bright_dark};
   border: none;
   border-radius: 2px;
   outline: none;
