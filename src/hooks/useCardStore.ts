@@ -34,17 +34,21 @@ export const useTodoStore = create<State & Action>((set) => ({
     })),
 
   selectCard: (id) =>
-    set((state) => ({
-      ...state,
-      selectedCardId: id
-    })),
+    set((state) => {
+      if (state.selectedCardId === id) return state;
+
+      return {
+        ...state,
+        selectedCardId: id
+      };
+    }),
 
   addTodo: (value) =>
     set((state) => ({
       ...state,
       cardRepository: state.cardRepository.map((item) => {
         if (item.id === state.selectedCardId) {
-          return { ...item, todos: [...item.todos, value] };
+          return { ...item, todos: [...item.todos, { id: uuid(), content: value }] };
         }
         return item;
       })

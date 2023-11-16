@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useTodoStore } from '../hooks/useCardStore';
 import { CardData } from '../types';
 import Button from './Button';
+import TodoContent from './TodoContent';
 
 interface TodoCard {
   cardData: CardData;
@@ -16,8 +17,8 @@ export default function TodoCard({ cardData }: TodoCard) {
         <CardTitle>{cardData.title}</CardTitle>
         {cardData.todos.length > 0 && (
           <Todos>
-            {cardData.todos.map((todo, index) => (
-              <li key={index}>{todo}</li>
+            {cardData.todos.map((todo) => (
+              <TodoContent key={todo.id} todo={todo} />
             ))}
           </Todos>
         )}
