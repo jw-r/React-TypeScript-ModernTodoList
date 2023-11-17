@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import { useCardStore } from '../hooks/useCardStore';
+import { isBlank } from '../utils/isBlank';
+import { isSame } from '../utils/isSame';
+import { useSwitch } from '../hooks/useSwitch';
 
 interface CardTitleProps {
   cardId: string;
@@ -10,17 +13,19 @@ interface CardTitleProps {
 export default function CardTitle({ cardId, title }: CardTitleProps) {
   const { changeTitle } = useCardStore();
   const [value, setValue] = useState('');
-  const [open, isOpen] = useState(false);
+  const { isOn, toggleSwitch } = useSwitch(false);
 
   const changeCardTitle = () => {
-    changeTitle(cardId, value);
+    if (!isSame(title, value) && !isBlank(value)) {
+      changeTitle(cardId, value);
+    }
 
-    isOpen((prev) => !prev);
+    toggleSwitch();
   };
 
   return (
     <Wrap>
-      {open ? (
+      {isOn ? (
         <form onSubmit={changeCardTitle}>
           <TitleInput
             onChange={({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setValue(value)}
@@ -30,7 +35,7 @@ export default function CardTitle({ cardId, title }: CardTitleProps) {
           />
         </form>
       ) : (
-        <Title onClick={() => isOpen((prev) => !prev)}>{title}</Title>
+        <Title onClick={toggleSwitch}>{title}</Title>
       )}
     </Wrap>
   );

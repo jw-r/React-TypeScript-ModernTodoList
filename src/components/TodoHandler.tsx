@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Button from './Button';
 import React, { useState } from 'react';
 import { useCardStore } from '../hooks/useCardStore';
+import { isBlank } from '../utils/isBlank';
 
 export default function TodoHandler() {
   const { cardRepository, selectedCardId, addTodo } = useCardStore();
@@ -20,7 +21,7 @@ export default function TodoHandler() {
       return;
     }
 
-    if (value.replace(/\s/g, '')) {
+    if (!isBlank(value)) {
       addTodo(value);
       setValue('');
     }
