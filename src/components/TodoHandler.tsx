@@ -6,12 +6,10 @@ import { isBlank } from '../utils/isBlank';
 import { ALERT_MESSAGE } from '../constants';
 
 export default function TodoHandler() {
-  const { cardRepository, selectedCardId, addTodo, clearCard } = useCardStore();
+  const { cardRepository, selectedCardId, addTodo, addTodoAll, clearCard } = useCardStore();
   const [value, setValue] = useState('');
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const alertIfNotValidOrExecute = (callback: (value: string) => void) => {
     if (cardRepository.length < 1) {
       alert(ALERT_MESSAGE.createCardFirst);
       return;
@@ -23,9 +21,15 @@ export default function TodoHandler() {
     }
 
     if (!isBlank(value)) {
-      addTodo(value);
+      callback(value);
       setValue('');
     }
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    alertIfNotValidOrExecute(addTodo);
   };
 
   return (
@@ -34,6 +38,9 @@ export default function TodoHandler() {
         <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder='할일을 추가해주세요' />
         <Actions>
           <Button>추가</Button>
+          <Button type='button' color='green' onClick={() => alertIfNotValidOrExecute(addTodoAll)}>
+            전체 추가
+          </Button>
           <Button type='button' color='red' onClick={clearCard}>
             전체 삭제
           </Button>

@@ -14,6 +14,7 @@ interface Action {
   clearCard: () => void;
   selectCard: (id: CardData['id']) => void;
   addTodo: (value: string) => void;
+  addTodoAll: (value: string) => void;
   changeTitle: (id: CardData['id'], value: string) => void;
   toggleTodoChecked: (cardId: CardData['id'], todoId: Todo['id']) => void;
 }
@@ -42,6 +43,25 @@ export const useCardStore = create<State & Action>()(
           cardRepository: state.cardRepository.filter(({ id }) => id !== targetId)
         })),
 
+      addTodo: (value) =>
+        set((state) => ({
+          ...state,
+          cardRepository: state.cardRepository.map((item) => {
+            if (item.id !== state.selectedCardId) return item;
+
+            return { ...item, todos: [...item.todos, { id: uuid(), content: value, checked: false }] };
+          })
+        })),
+
+      addTodoAll: (value) =>
+        set((state) => ({
+          ...state,
+          cardRepository: state.cardRepository.map((item) => ({
+            ...item,
+            todos: [...item.todos, { id: uuid(), content: value, checked: false }]
+          }))
+        })),
+
       clearCard: () =>
         set(() => ({
           selectedCardId: undefined,
@@ -66,16 +86,6 @@ export const useCardStore = create<State & Action>()(
               return { ...item, title: value };
             }
             return item;
-          })
-        })),
-
-      addTodo: (value) =>
-        set((state) => ({
-          ...state,
-          cardRepository: state.cardRepository.map((item) => {
-            if (item.id !== state.selectedCardId) return item;
-
-            return { ...item, todos: [...item.todos, { id: uuid(), content: value, checked: false }] };
           })
         })),
 

@@ -6,7 +6,7 @@
 
 ## Preview
 
-<video src='https://github.com/jw-r/React-TypeScript-ModernTodoList/assets/88191233/a86b30fa-4498-4555-9715-9dd225b7d9ab' controls autoplay loop />;
+<video src='https://github.com/jw-r/React-TypeScript-ModernTodoList/assets/88191233/23a0fac7-6827-4d5f-b975-1c8e1cf249fc' controls autoplay loop />;
 
 ## Installation & Launch
 
@@ -82,8 +82,9 @@ TodoCard를 추가하는 인터렉션을 포함한 Component입니다
   - `카드 삭제`
   - `카드 전체 삭제`
   - `카드 선택`
-  - `카드 추가`
   - `카드 Title 변경`
+  - `선택된 카드에 Todo 항목 추가`
+  - `모든 카드에 Todo 항목 추가`
   - `Todo 항목의 완료 상태 변경`
 
 ---
