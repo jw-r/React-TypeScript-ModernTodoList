@@ -23,5 +23,14 @@ const Wrap = styled.div`
   gap: 40px;
 
   width: 100%;
-  padding: 30px;
+  margin-top: 160px;
+  padding: 24px;
+
+  @media screen and (max-width: 870px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 570px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

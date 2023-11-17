@@ -1,4 +1,4 @@
-export const MAX_CARD_LENGTH = 9;
+export const MAX_CARD_LENGTH = 42;
 
 export const ALERT_MESSAGE = {
   createCardFirst: '먼저 카드를 생성해주세요',

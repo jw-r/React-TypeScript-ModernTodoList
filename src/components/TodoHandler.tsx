@@ -41,20 +41,28 @@ export default function TodoHandler() {
 }
 
 const Wrap = styled.div`
-  display: inline-block;
+  position: fixed;
+  z-index: 1;
 
-  margin-top: 16px;
-  padding: 30px 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
-  border-radius: 6px;
-  box-shadow: ${(props) => props.theme.shadow.main};
+  width: 100%;
+  height: 160px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
-  width: 280px;
+  row-gap: 12px;
+
+  width: 320px;
+  padding: 30px 20px;
+
+  background-color: ${(props) => props.theme.colors.bright};
+  border-radius: 6px;
+  box-shadow: ${(props) => props.theme.shadow.main};
 `;
 
 const Input = styled.input`
