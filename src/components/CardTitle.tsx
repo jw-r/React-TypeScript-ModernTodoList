@@ -42,9 +42,10 @@ export default function CardTitle({ cardId, title }: CardTitleProps) {
 }
 
 const Wrap = styled.div`
+  height: 24px;
   margin-bottom: 8px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 900;
 `;
 
 const Title = styled.div`
