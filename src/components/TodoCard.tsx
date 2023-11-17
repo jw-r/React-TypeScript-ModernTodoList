@@ -1,20 +1,21 @@
 import styled from '@emotion/styled';
-import { useTodoStore } from '../hooks/useCardStore';
+import { useCardStore } from '../hooks/useCardStore';
 import { CardData } from '../types';
-import Button from './Button';
 import TodoContent from './TodoContent';
+import { IoTrashOutline } from 'react-icons/io5';
+import CardTitle from './CardTitle';
 
 interface TodoCard {
   cardData: CardData;
 }
 
 export default function TodoCard({ cardData }: TodoCard) {
-  const { deleteCard, selectedCardId, selectCard } = useTodoStore();
+  const { deleteCard, selectedCardId, selectCard } = useCardStore();
 
   return (
     <Wrap key={cardData.id}>
       <Card selected={selectedCardId === cardData.id} onClick={() => selectCard(cardData.id)}>
-        <CardTitle>{cardData.title}</CardTitle>
+        <CardTitle cardId={cardData.id} title={cardData.title} />
         {cardData.todos.length > 0 && (
           <Todos>
             {cardData.todos.map((todo) => (
@@ -24,7 +25,7 @@ export default function TodoCard({ cardData }: TodoCard) {
         )}
       </Card>
       <DeleteButton id={cardData.id} onClick={() => deleteCard(cardData.id)}>
-        ❌
+        <IoTrashOutline size={20} id={cardData.id} onClick={() => deleteCard(cardData.id)} />
       </DeleteButton>
     </Wrap>
   );
@@ -49,12 +50,6 @@ const Card = styled.div<{ selected: boolean }>`
   box-shadow: ${(props) => (props.selected ? props.theme.shadow.main : '')};
 `;
 
-const CardTitle = styled.div`
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 600;
-`;
-
 const Todos = styled.ul`
   display: flex;
   flex-direction: column;
@@ -65,12 +60,8 @@ const Todos = styled.ul`
   line-height: 30px;
 `;
 
-const DeleteButton = styled(Button)`
+const DeleteButton = styled.button`
   position: absolute;
-  top: 4px;
+  top: 6px;
   right: 4px;
-
-  font-size: 8px;
-
-  background-color: #ffd0d0;
 `;

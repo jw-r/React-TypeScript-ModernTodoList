@@ -138,6 +138,10 @@ const reset = css`
     border-spacing: 0;
     border-collapse: collapse;
   }
+
+  button {
+    border: none;
+  }
 `;
 
 export default reset;

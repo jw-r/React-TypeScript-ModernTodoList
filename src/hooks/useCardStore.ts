@@ -12,9 +12,10 @@ interface Action {
   deleteCard: (id: CardData['id']) => void;
   selectCard: (id: CardData['id']) => void;
   addTodo: (value: string) => void;
+  changeTitle: (id: string, value: string) => void;
 }
 
-export const useTodoStore = create<State & Action>((set) => ({
+export const useCardStore = create<State & Action>((set) => ({
   cardRepository: [],
   selectedCardId: undefined,
 
@@ -42,6 +43,17 @@ export const useTodoStore = create<State & Action>((set) => ({
         selectedCardId: id
       };
     }),
+
+  changeTitle: (id, value) =>
+    set((state) => ({
+      ...state,
+      cardRepository: state.cardRepository.map((item) => {
+        if (item.id === id) {
+          return { ...item, title: value };
+        }
+        return item;
+      })
+    })),
 
   addTodo: (value) =>
     set((state) => ({

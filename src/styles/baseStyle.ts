@@ -52,4 +52,9 @@ export const baseStyle = css`
     background-size: contain;
     border-color: #ff6f0f;
   }
+
+  button {
+    background-color: inherit;
+    border-radius: 8px;
+  }
 `;

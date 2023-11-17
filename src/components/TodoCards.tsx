@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import AddCardButton from './AddCard';
-import { useTodoStore } from '../hooks/useCardStore';
+import { useCardStore } from '../hooks/useCardStore';
 import TodoCard from './TodoCard';
 import { MAX_CARD_LENGTH } from '../constants';
 
 export default function TodoCards() {
-  const { cardRepository, createCard } = useTodoStore();
+  const { cardRepository, createCard } = useCardStore();
 
   return (
     <Wrap>

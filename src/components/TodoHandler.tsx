@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import Button from './Button';
 import React, { useState } from 'react';
-import { useTodoStore } from '../hooks/useCardStore';
+import { useCardStore } from '../hooks/useCardStore';
 
 export default function TodoHandler() {
-  const { cardRepository, selectedCardId, addTodo } = useTodoStore();
+  const { cardRepository, selectedCardId, addTodo } = useCardStore();
   const [value, setValue] = useState('');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
