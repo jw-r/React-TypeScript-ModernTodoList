@@ -2,31 +2,30 @@ import styled from '@emotion/styled';
 import { useCardStore } from '../hooks/useCardStore';
 import { CardData } from '../types';
 import TodoContent from './TodoContent';
-import { IoTrashOutline } from 'react-icons/io5';
 import CardTitle from './CardTitle';
+import DeleteCardButton from './DeleteCardButton';
 
 interface TodoCard {
   cardData: CardData;
 }
 
 export default function TodoCard({ cardData }: TodoCard) {
-  const { deleteCard, selectedCardId, selectCard } = useCardStore();
+  const { selectedCardId, selectCard } = useCardStore();
+  const { id: cardId, title, todos } = cardData;
 
   return (
-    <Wrap key={cardData.id}>
-      <Card selected={selectedCardId === cardData.id} onClick={() => selectCard(cardData.id)}>
-        <CardTitle cardId={cardData.id} title={cardData.title} />
-        {cardData.todos.length > 0 && (
+    <Wrap key={cardId}>
+      <Card selected={selectedCardId === cardId} onClick={() => selectCard(cardId)}>
+        <CardTitle cardId={cardId} title={title} />
+        {todos.length > 0 && (
           <Todos>
-            {cardData.todos.map((todo) => (
+            {todos.map((todo) => (
               <TodoContent key={todo.id} todo={todo} />
             ))}
           </Todos>
         )}
       </Card>
-      <DeleteButton id={cardData.id} onClick={() => deleteCard(cardData.id)}>
-        <IoTrashOutline size={20} id={cardData.id} onClick={() => deleteCard(cardData.id)} />
-      </DeleteButton>
+      <DeleteCardButton cardId={cardId} />
     </Wrap>
   );
 }
@@ -58,10 +57,4 @@ const Todos = styled.ul`
   width: 100%;
 
   line-height: 30px;
-`;
-
-const DeleteButton = styled.button`
-  position: absolute;
-  top: 6px;
-  right: 4px;
 `;

@@ -3,6 +3,7 @@ import Button from './Button';
 import React, { useState } from 'react';
 import { useCardStore } from '../hooks/useCardStore';
 import { isBlank } from '../utils/isBlank';
+import { ALERT_MESSAGE } from '../constants';
 
 export default function TodoHandler() {
   const { cardRepository, selectedCardId, addTodo } = useCardStore();
@@ -12,12 +13,12 @@ export default function TodoHandler() {
     e.preventDefault();
 
     if (cardRepository.length < 1) {
-      alert('먼저 카드를 생성해주세요');
+      alert(ALERT_MESSAGE.createCardFirst);
       return;
     }
 
     if (!selectedCardId) {
-      alert('할일을 추가할 카드를 선택해주세요');
+      alert(ALERT_MESSAGE.selectCardFirst);
       return;
     }
 

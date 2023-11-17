@@ -4,10 +4,11 @@ import { useCardStore } from '../hooks/useCardStore';
 import { isBlank } from '../utils/isBlank';
 import { isSame } from '../utils/isSame';
 import { useSwitch } from '../hooks/useSwitch';
+import { CardData } from '../types';
 
 interface CardTitleProps {
-  cardId: string;
-  title: string;
+  cardId: CardData['id'];
+  title: CardData['title'];
 }
 
 export default function CardTitle({ cardId, title }: CardTitleProps) {
@@ -28,7 +29,7 @@ export default function CardTitle({ cardId, title }: CardTitleProps) {
       {isOn ? (
         <form onSubmit={changeCardTitle}>
           <TitleInput
-            onChange={({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => setValue(value)}
+            onChange={(e) => setValue(e.target.value)}
             onBlur={changeCardTitle}
             placeholder={title}
             autoFocus={true}
