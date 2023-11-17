@@ -20,7 +20,7 @@ export default function TodoCard({ cardData }: TodoCard) {
         {todos.length > 0 && (
           <Todos>
             {todos.map((todo) => (
-              <TodoContent key={todo.id} todo={todo} />
+              <TodoContent key={todo.id} cardId={cardId} todo={todo} />
             ))}
           </Todos>
         )}

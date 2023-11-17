@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { CardData } from '../types';
+import { CardData, Todo } from '../types';
 import uuid from 'react-uuid';
 
 interface State {
@@ -14,6 +14,7 @@ interface Action {
   selectCard: (id: CardData['id']) => void;
   addTodo: (value: string) => void;
   changeTitle: (id: CardData['id'], value: string) => void;
+  toggleTodoChecked: (cardId: CardData['id'], todoId: Todo['id']) => void;
 }
 
 export const useCardStore = create<State & Action>()(
@@ -65,10 +66,26 @@ export const useCardStore = create<State & Action>()(
         set((state) => ({
           ...state,
           cardRepository: state.cardRepository.map((item) => {
-            if (item.id === state.selectedCardId) {
-              return { ...item, todos: [...item.todos, { id: uuid(), content: value }] };
-            }
-            return item;
+            if (item.id !== state.selectedCardId) return item;
+
+            return { ...item, todos: [...item.todos, { id: uuid(), content: value, checked: false }] };
+          })
+        })),
+
+      toggleTodoChecked: (cardId: CardData['id'], todoId: Todo['id']) =>
+        set((state) => ({
+          ...state,
+          cardRepository: state.cardRepository.map((item) => {
+            if (item.id !== cardId) return item;
+
+            return {
+              ...item,
+              todos: item.todos.map((todo) => {
+                if (todo.id !== todoId) return todo;
+
+                return { ...todo, checked: !todo.checked };
+              })
+            };
           })
         }))
     }),
