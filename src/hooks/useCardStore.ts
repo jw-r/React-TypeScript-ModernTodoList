@@ -11,6 +11,7 @@ interface State {
 interface Action {
   createCard: () => void;
   deleteCard: (id: CardData['id']) => void;
+  clearCard: () => void;
   selectCard: (id: CardData['id']) => void;
   addTodo: (value: string) => void;
   changeTitle: (id: CardData['id'], value: string) => void;
@@ -39,6 +40,12 @@ export const useCardStore = create<State & Action>()(
         set((state) => ({
           selectedCardId: state.selectedCardId === targetId ? undefined : state.selectedCardId,
           cardRepository: state.cardRepository.filter(({ id }) => id !== targetId)
+        })),
+
+      clearCard: () =>
+        set(() => ({
+          selectedCardId: undefined,
+          cardRepository: []
         })),
 
       selectCard: (id) =>

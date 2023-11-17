@@ -6,7 +6,7 @@ import { isBlank } from '../utils/isBlank';
 import { ALERT_MESSAGE } from '../constants';
 
 export default function TodoHandler() {
-  const { cardRepository, selectedCardId, addTodo } = useCardStore();
+  const { cardRepository, selectedCardId, addTodo, clearCard } = useCardStore();
   const [value, setValue] = useState('');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,6 +34,9 @@ export default function TodoHandler() {
         <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder='할일을 추가해주세요' />
         <Actions>
           <Button>추가</Button>
+          <Button type='button' color='red' onClick={clearCard}>
+            전체 삭제
+          </Button>
         </Actions>
       </Form>
     </Wrap>
@@ -74,4 +77,7 @@ const Input = styled.input`
   outline: none;
 `;
 
-const Actions = styled.div``;
+const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

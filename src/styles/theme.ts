@@ -5,6 +5,8 @@ declare module '@emotion/react' {
       main_dark: string;
       bright: string;
       bright_dark: string;
+      red: string;
+      red_dark: string;
 
       card_background: string;
     };
@@ -21,6 +23,8 @@ export const theme = {
     main_dark: '#f06000',
     bright: 'white',
     bright_dark: '#f2f3f6',
+    red: 'red',
+    red_dark: '#a5090b',
 
     card_background: 'aliceblue'
   },
