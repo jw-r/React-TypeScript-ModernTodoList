@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCardStore } from '../hooks/useCardStore';
 import { isBlank } from '../utils/isBlank';
-import { isSame } from '../utils/isSame';
 import { useSwitch } from '../hooks/useSwitch';
 import { CardData } from '../types';
 
@@ -17,7 +16,7 @@ export default function CardTitle({ cardId, title }: CardTitleProps) {
   const { isOn, toggleSwitch } = useSwitch(false);
 
   const changeCardTitle = () => {
-    if (!isSame(title, value) && !isBlank(value)) {
+    if (title !== value && !isBlank(value)) {
       changeTitle(cardId, value);
     }
 
