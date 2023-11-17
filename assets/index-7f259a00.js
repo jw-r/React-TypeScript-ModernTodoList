@@ -140,9 +140,10 @@ Error generating stack: `+o.message+`
   text-decoration-color: ${e=>e.theme.colors.main};
   text-decoration-thickness: 2px;
 `,yv=e=>{const[t,n]=V.useState(e||!1);return{isOn:t,onSwitch:()=>n(!0),offSwitch:()=>n(!1),toggleSwitch:()=>n(i=>!i)}};function gv({cardId:e,title:t}){const{changeTitle:n}=Nn(),[r,l]=V.useState(""),{isOn:o,toggleSwitch:i}=yv(!1),u=()=>{t!==r&&!Zf(r)&&n(e,r),i()};return L.jsx(wv,{children:o?L.jsx("form",{onSubmit:u,children:L.jsx(kv,{onChange:s=>l(s.target.value),onBlur:u,placeholder:t,autoFocus:!0})}):L.jsx(Sv,{onClick:i,children:t})})}const wv=re.div`
+  height: 24px;
   margin-bottom: 8px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 900;
 `,Sv=re.div`
   cursor: pointer;
 
