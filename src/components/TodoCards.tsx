@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import AddCardButton from './AddCard';
+import AddCardButton from './AddCardButton';
 import { useCardStore } from '../hooks/useCardStore';
 import TodoCard from './TodoCard';
 import { MAX_CARD_LENGTH } from '../constants';
